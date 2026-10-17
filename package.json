@@ -1,7 +1,7 @@
 {
     "name": "Site 23 Launcher",
     "preductname": "site23",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Launcher Mincraft pour le serveur Site23",
     "main": "src/app.js",
     "author": {

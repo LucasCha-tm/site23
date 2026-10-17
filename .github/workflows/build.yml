@@ -1,30 +1,3 @@
-# module du helios launcher
-name: Launcher Build
-on:
-  push:
-    branches: [ master ]
-
-permissions:
-  contents: write
-
-jobs:
-  create-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Get version
-        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.version }}
-          name: release ${{ env.version }}
-          draft: false
-          prerelease: ${{ contains(env.version, 'beta') || contains(env.version, 'alpha') }}
-
   build-launcher:
     needs: create-release
     runs-on: ${{ matrix.os }}
@@ -56,3 +29,20 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build
         shell: bash
+
+      - name: Get version
+        id: pkg
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.pkg.outputs.version }}
+          files: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.AppImage
+            dist/*.deb
+            dist/*.blockmap
+            dist/latest*.yml
