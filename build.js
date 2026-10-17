@@ -59,7 +59,8 @@ class Index {
 
     async buildPlatform() {
         await this.Obfuscate();
-        builder.build({
+        return builder.build({
+            publish: 'never',
             config: {
                 generateUpdatesFilesForAllChannels: false,
                 appId: preductname,
@@ -136,6 +137,7 @@ class Index {
             console.log('le build est terminé')
         }).catch(err => {
             console.error('Error during build!', err)
+            process.exit(1)
         })
     }
 

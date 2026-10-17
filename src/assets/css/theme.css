@@ -35,3 +35,31 @@
     --transition: 0.2s;
     --cut: 12px; /* taille des coins coupés */
 }
+
+/*******************************************************************************
+ *  Thème clair : l'application met la classe "light" sur le body
+ *  (le thème sombre est celui défini dans :root)
+ ******************************************************************************/
+
+body.light {
+    --background: #f1efe8;
+    --background-transparent: rgba(241, 239, 232, 0.88);
+    --background-element: #e2dfd6;
+    --shadow: #d9d6cc;
+    --line: #c4c0b4;
+
+    --color: #141413;
+    --color-muted: #6a675f;
+
+    --element-color: #d9540f;
+    --element-dark: #b04208;
+    --on-accent: #ffffff;
+
+    --light-color: #f1efe8;
+    --dark-color: #141413;
+
+    --ok: #2e7d32;
+    --ko: #c62828;
+
+    --svg-color: none;
+}
