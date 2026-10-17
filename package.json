@@ -1,7 +1,7 @@
 {
     "name": "Site 23 Launcher",
     "preductname": "site23",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Launcher Mincraft pour le serveur Site23",
     "main": "src/app.js",
     "author": {
@@ -9,7 +9,7 @@
         "email": "site23.rp@gmail.com",
         "url": "https://github.com/lucascha-tm"
     },
-    "url": "https://playsite23beta.qzz.io/1/",
+    "url": "https://chaxcube.alwaysdata.net",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
         "dev": "cross-env-shell DEV_TOOL=open nodemon --exec npm start",
@@ -30,7 +30,7 @@
     },
     "devDependencies": {
         "cross-env": "^10.1.0",
-        "electron": "^40.0.0",
+        "electron": "^44.9.0",
         "electron-builder": "^26.0.12",
         "javascript-obfuscator": "^5.1.0",
         "jimp": "^1.6.0",
@@ -40,5 +40,8 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lucascha-tm/site23.git"
+    },
+    "allowScripts": {
+        "electron": true
     }
 }

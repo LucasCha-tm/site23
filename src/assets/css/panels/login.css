@@ -7,9 +7,11 @@
 
 .login-tabs {
     position: absolute;
-    padding: 15px;
+    padding: 2rem 1.5rem;
     background: var(--background);
-    border-radius: 15px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--element-color);
+    border-radius: 2px;
     text-align: center;
     min-width: 40%;
 }
@@ -23,28 +25,95 @@
 
 .login-text {
     font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
+
+/*******************************************************************************
+ *  Boutons
+ ******************************************************************************/
 
 .connect,
 .cancel {
+    border-radius: 2px;
+    padding: 0.4rem 3rem;
+    font-size: inherit;
+    font-weight: 800;
+    margin: 15px 10px;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+/* Action principale : pleine, coins coupés */
+.connect {
+    background: var(--element-color);
+    color: var(--on-accent);
+    border: none;
+    padding: 0.5rem 3.2rem;
+    clip-path: polygon(
+        var(--cut) 0, 100% 0,
+        100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%,
+        0 100%, 0 var(--cut)
+    );
+}
+
+.connect:hover {
+    background: var(--element-dark);
+}
+
+/* Action secondaire : contour */
+.cancel {
     background: none;
     color: var(--color);
-    border: solid 4px var(--element-color);
-    border-radius: 10px;
-    padding: 0.3rem 4rem;
-    font-size: inherit;
-    font-weight: bold;
-    margin: 15px 10px;
+    border: solid 2px var(--line);
 }
+
+.cancel:hover {
+    border-color: var(--element-color);
+    color: var(--element-color);
+}
+
+/*******************************************************************************
+ *  Champs
+ ******************************************************************************/
 
 .input-login .email,
 .input-login .password,
 .A2F {
     color: var(--color);
-    background: none;
-    border: solid 2px var(--element-color);
-    border-radius: 30px;
+    background: var(--shadow);
+    border: solid 1px var(--line);
+    border-bottom: solid 2px var(--element-color);
+    border-radius: 2px;
     width: 50%;
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
     margin-top: 10px;
+    font-family: inherit;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.input-login .email::placeholder,
+.input-login .password::placeholder,
+.A2F::placeholder {
+    color: var(--color-muted);
+}
+
+.input-login .email:focus,
+.input-login .password:focus,
+.A2F:focus {
+    outline: none;
+    background: var(--background-element);
+    border-color: var(--element-color);
+}
+
+.connect:focus-visible,
+.cancel:focus-visible {
+    outline: 2px solid var(--color);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }

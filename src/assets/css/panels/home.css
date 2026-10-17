@@ -6,9 +6,7 @@
 }
 
 /*******************************************************************************
- *                                                                             *
- * Status server                                                               *
- *                                                                             *
+ *  Statut du serveur
  ******************************************************************************/
 
 .status-server {
@@ -16,11 +14,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--background);
+    gap: 1rem;
+    background: var(--background-transparent);
+    border-left: 3px solid var(--element-color);
     width: 25rem;
     height: 3rem;
     color: var(--color);
-    border-radius: 10px;
+    border-radius: 2px;
     margin-top: 3rem;
     padding: 1rem;
     text-align: center;
@@ -32,23 +32,25 @@
 
 .server-status-name {
     font-size: 1.5rem;
+    font-weight: 600;
     color: var(--color);
 }
 
 .server-status-text {
-    font-size: 0.6rem;
-    color: #1AC707;
+    font-size: 0.65rem;
+    color: var(--ok);
 }
 
 .server-status-infos .red {
-    color: #FF0409;
+    color: var(--ko);
 }
 
 .status-player-count {
     background: var(--shadow);
+    border: 1px solid var(--line);
     min-width: 3rem;
     height: 3rem;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .player-count {
@@ -65,11 +67,11 @@
     right: 10px;
     border-radius: 15px;
     border: solid 5px var(--background);
-    background: #1AC707;
+    background: var(--ok);
 }
 
 .red:after {
-    background: #FF0409;
+    background: var(--ko);
 }
 
 .home-bottom {
@@ -80,9 +82,7 @@
 }
 
 /*******************************************************************************
- *                                                                             *
- * news server                                                                 *
- *                                                                             *
+ *  Actualités
  ******************************************************************************/
 
 .new-tab {
@@ -96,8 +96,10 @@
 .titre-tab-new {
     margin-top: 1rem;
     font-size: 2rem;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2px;
+    border-bottom: 3px solid var(--element-color);
     background: var(--background-transparent);
     color: var(--color);
 }
@@ -105,14 +107,15 @@
 .news-list {
     width: 90%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 2px;
     margin: 1rem 0;
 }
 
 .news-block {
     width: 100%;
     margin: 0 0 1rem 0;
-    border-radius: 10px;
+    border-radius: 2px;
+    border-left: 3px solid var(--element-color);
     background: var(--background-transparent);
 }
 
@@ -121,11 +124,13 @@
     justify-content: space-between;
     padding: 1rem 1.5rem;
     align-items: center;
+    border-bottom: 1px solid var(--line);
 }
 
 .header-text .title {
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-color: var(--element-color);
+    text-underline-offset: 4px;
     font-size: 1.2rem;
     text-align: center;
 }
@@ -134,35 +139,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: var(--color-muted);
 }
 
 .news-content .bbWrapper {
-    padding: 0 1.5rem;
-    padding-bottom: 1rem;
+    padding: 1rem 1.5rem;
     font-size: 1.2rem;
-
 }
 
 .news-content .bbWrapper p {
-    font-weight: 100;
+    font-weight: 300;
     margin: 0;
-
 }
 
 .news-content .bbWrapper .news-author {
     margin-top: 1rem;
     text-align: end;
     font-size: 0.8rem;
+    color: var(--color-muted);
 }
 
 .news-content .bbWrapper .news-author span {
     font-weight: 700;
+    color: var(--color);
 }
 
 /*******************************************************************************
- *                                                                             *
- * social server                                                               *
- *                                                                             *
+ *  Réseaux sociaux
  ******************************************************************************/
 
 .social-tab {
@@ -177,21 +180,28 @@
 }
 
 .social-list {
-    border-radius: 10px;
+    border-radius: 2px;
     height: 100%;
 }
 
 .social-block {
     display: flex;
     background: var(--background-transparent);
+    border: 1px solid var(--line);
     width: 90px;
     height: 90px;
     margin-bottom: 1rem;
-    border-radius: 10px;
+    border-radius: 2px;
     font-size: 2rem;
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.social-block:hover {
+    border-color: var(--element-color);
+    background: var(--background-element);
 }
 
 .social-block .icon-social {
@@ -203,9 +213,7 @@
 }
 
 /*******************************************************************************
- *                                                                             *
- * sidebar                                                                     *
- *                                                                             *
+ *  Barre du bas
  ******************************************************************************/
 
 .sidebar {
@@ -215,26 +223,26 @@
     width: 100%;
     height: 90px;
     background: var(--background-transparent);
+    border-top: 1px solid var(--line);
 }
 
 .player-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 15px;
     height: 3rem;
     margin: 0 1.5rem;
 }
 
 .player-head {
-    background: url('../../images/default/setve.png'), no-repeat;
-    background-size: cover;
+    background: url('../../images/default/setve.png') center / cover no-repeat;
     image-rendering: pixelated;
     transition: var(--transition);
     height: 3rem;
     width: 3rem;
     pointer-events: none;
-    border-radius: 15px;
+    border-radius: 2px;
+    outline: 2px solid var(--line);
 }
 
 .player-menu {
@@ -249,41 +257,43 @@
     align-items: center;
 }
 
+/* Bouton Jouer : plein, coins coupés */
 .play-instance {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    border: solid 3px var(--element-color);
-    border-radius: 15px;
+    align-items: stretch;
     height: 3.2rem;
-    padding-right: 1.9rem;
+    background: var(--element-color);
+    cursor: pointer;
+    clip-path: polygon(
+        var(--cut) 0, 100% 0,
+        100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%,
+        0 100%, 0 var(--cut)
+    );
+    transition: background var(--transition);
+}
+
+.play-instance:hover {
+    background: var(--element-dark);
 }
 
 .play-btn {
     border: none;
-    border-radius: 10px;
     background: none;
-    color: var(--color);
-    font-size: 2rem;
-    font-weight: bolder;
-    padding: 0 1.5rem;
+    color: var(--on-accent);
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding: 0 1.5rem 0 2rem;
     pointer-events: none;
 }
 
 .instance-select {
     display: flex;
     align-items: center;
-    position: absolute;
-    right: -3;
-    top: -2;
-    color: var(--element-color);
+    justify-content: center;
+    color: var(--on-accent);
     font-size: 1rem;
-    height: calc(100% - 1px);
-    border: solid 3px var(--element-color);
-    text-align: center;
-    border-radius: 15px;
-    padding: 0 0.5rem;
+    padding: 0 1rem 0 0.9rem;
+    border-left: 2px solid rgba(11, 11, 11, 0.35);
     cursor: pointer;
 }
 
@@ -305,29 +315,39 @@
 
 .progress-bar::-webkit-progress-bar {
     background-color: var(--background);
-    border: solid 1px var(--element-color);
-    border-radius: 10px;
+    border: solid 1px var(--line);
+    border-radius: 2px;
 }
 
 .progress-bar::-webkit-progress-value {
     background-color: var(--element-color);
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .settings-btn {
     width: 3rem;
     height: 3rem;
     font-size: 3rem;
-    color: var(--element-color);
+    color: var(--color-muted);
     margin: 0 1.5rem;
+    cursor: pointer;
+    transition: color var(--transition);
 }
+
+.settings-btn:hover {
+    color: var(--element-color);
+}
+
+/*******************************************************************************
+ *  Choix de l'instance
+ ******************************************************************************/
 
 .instance-popup {
     position: absolute;
     display: none;
     width: 100%;
     height: 100%;
-    background: #000000b3;
+    background: #000000cc;
     z-index: 10;
     flex-direction: column;
     align-items: center;
@@ -338,8 +358,11 @@
 .instances-tab {
     position: relative;
     background: var(--background);
-    border-radius: 10px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--element-color);
+    border-radius: 2px;
     padding: 1rem 3rem;
+    min-width: 20rem;
 }
 
 .close-popup {
@@ -348,31 +371,56 @@
     top: 10px;
     right: 10px;
     background: var(--shadow);
+    border: 1px solid var(--line);
     height: 30px;
     width: 30px;
-    border-radius: 10px;
+    border-radius: 2px;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: border-color var(--transition);
+}
+
+.close-popup:hover {
+    border-color: var(--element-color);
 }
 
 .instances-tab p {
     margin-top: 1.5rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
 }
 
 .instance-elements {
     background: var(--background-element);
+    border-left: 3px solid transparent;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 2px;
     margin: 0.5rem 0;
+    padding: 0.2rem 0;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: background var(--transition), border-color var(--transition);
 }
 
 .instance-elements:hover {
-    background: var(--element-color);
+    background: var(--shadow);
+    border-left-color: var(--element-color);
 }
 
 .active-instance {
     background: var(--element-color);
+    color: var(--on-accent);
+    font-weight: 700;
+}
+
+.active-instance:hover {
+    background: var(--element-color);
+    border-left-color: var(--on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }

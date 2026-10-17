@@ -1,24 +1,37 @@
-.global {
-    --element-color: #00bd7a;
-    --transition: all 0.5s cubic-bezier(1, 0.46, 0, 1.29);
-    --dark-color: #292929;
-    --light-color: rgb(245, 245, 245);
-}
+/*******************************************************************************
+ *  Thème SCP Foundation - Site-23
+ *  Noir de confinement, gris béton, orange de signalisation.
+ ******************************************************************************/
 
-.dark {
-    --color: #F5F5F5;
-    --background: #292929;
-    --background-element: #424242;
-    --background-transparent: #2c2c2ccc;
-    --shadow: rgba(25, 25, 25, 0.7);
-    --svg-color: brightness(0) saturate(100%) invert(100%) sepia(55%) saturate(23%) hue-rotate(236deg) brightness(108%) contrast(92%);
-}
+:root {
+    /* Surfaces */
+    --background: #0b0b0b;
+    --background-transparent: rgba(14, 14, 14, 0.82);
+    --background-element: #1d1d1b;
+    --shadow: #171716;
+    --line: #2c2c2a;
 
-.light {
-    --color: #151515;
-    --background: rgb(245, 245, 245);
-    --background-element: #c2c2c2;
-    --background-transparent: rgba(204, 204, 204, 0.8);
-    --shadow: rgba(208, 208, 208, 0.7);
-    --svg-color: brightness(0) saturate(100%) invert(0%) sepia(5%) saturate(1719%) hue-rotate(357deg) brightness(94%) contrast(84%);
+    /* Texte */
+    --color: #ece9e1;
+    --color-muted: #8f8c84;
+
+    /* Accent : orange de signalisation */
+    --element-color: #f26b21;
+    --element-dark: #c9540f;
+    --on-accent: #0b0b0b;
+
+    /* Utilisées par les boutons de thème (réglages) */
+    --light-color: #ece9e1;
+    --dark-color: #0b0b0b;
+
+    /* États du serveur */
+    --ok: #5dbb63;
+    --ko: #e5383b;
+
+    /* Icônes SVG noires -> claires */
+    --svg-color: invert(1) brightness(0.92);
+
+    /* Divers */
+    --transition: 0.2s;
+    --cut: 12px; /* taille des coins coupés */
 }
