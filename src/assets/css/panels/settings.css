@@ -1,44 +1,56 @@
-.settings .container {
-    display: flex;
-    height: 100%;
-}
-
 /*******************************************************************************
- *  Navigation latérale
+ *  Réglages : barre latérale + en-tête à onglets + cartes
  ******************************************************************************/
 
-.nav-settings {
-    width: 20%;
+.settings .container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
     height: 100%;
-    background: var(--background);
-    border-right: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 2.5rem;
-}
-
-.nav-settings p {
-    font-size: 60%;
-    margin-top: 80px;
-}
-
-.nav-box {
     width: 100%;
+}
+
+.settings-main {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: 2.2rem 2rem 0;
+    box-sizing: border-box;
+}
+
+.settings-header {
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.settings-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color);
+}
+
+/* Onglets */
+.nav-box {
+    display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .nav-settings-btn {
-    font-size: 50%;
-    border: solid 2px var(--line);
-    padding: 5px 10px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1rem;
+    border: 1px solid var(--line);
+    background: var(--background-transparent);
+    padding: 0.5rem 1rem;
     border-radius: 2px;
-    width: 70%;
     text-align: center;
-    margin: 0.5rem 0;
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition), color var(--transition);
 }
@@ -54,10 +66,10 @@
     font-weight: 700;
 }
 
-/* Enregistrer : contour orange, plein au survol */
+/* Retour : contour orange, plein au survol */
 .nav-box #save {
-    border: solid 2px var(--element-color);
-    margin: 3rem;
+    border-color: var(--element-color);
+    margin-left: 1rem;
 }
 
 .nav-box #save:hover {
@@ -74,10 +86,13 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    left: 0;
     right: 0;
-    width: 80%;
-    height: calc(100% - 26px);
+    top: 6.4rem;
+    bottom: 0;
+    padding: 0 2rem 1rem;
+    box-sizing: border-box;
     opacity: 0;
     pointer-events: none;
 }
@@ -88,13 +103,26 @@
     pointer-events: all;
 }
 
+.titre-tab {
+    align-self: flex-start;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 1.2rem 0 0.6rem;
+    padding: 0;
+}
+
 .settings-elements-box {
-    background: var(--background-element);
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--background-transparent);
     border: 1px solid var(--line);
-    width: 80%;
+    border-left: 3px solid var(--element-color);
     border-radius: 2px;
-    padding: 1.5rem 2rem;
-    margin: 0.5rem;
+    padding: 1.2rem 1.5rem;
+    margin: 0 0 0.6rem;
 }
 
 .setting-text {
@@ -102,23 +130,8 @@
     color: var(--color-muted);
 }
 
-.titre-tab {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 1.5rem 0;
-    padding: 0.5rem 2rem;
-    border-radius: 2px;
-    border-bottom: 3px solid var(--element-color);
-    text-align: center;
-    background: var(--background-transparent);
-    color: var(--color);
-}
-
 .settings-elements {
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     display: flex;
     align-items: center;
     width: 100%;
@@ -203,7 +216,7 @@
     max-height: 90%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: flex-start;
 }
 
@@ -215,7 +228,7 @@
     align-items: center;
     width: calc(400px - 4px);
     height: calc(100px - 4px);
-    margin: 1rem;
+    margin: 0 1rem 1rem 0;
     border-radius: 2px;
     transition: border-color var(--transition);
 }
@@ -457,6 +470,38 @@
 
 .active-close {
     border: 2px solid var(--element-color);
+}
+
+.fx-btn {
+    font-size: 0.85rem;
+    min-width: 9rem;
+    text-align: center;
+    border: 2px solid var(--line);
+    border-radius: 2px;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.fx-btn:hover {
+    border-color: var(--element-color);
+}
+
+.active-fx {
+    border-color: var(--element-color);
+    background: var(--background-element);
+}
+
+.fx-volume-box {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+}
+
+.fx-volume {
+    width: 10rem;
+    accent-color: var(--element-color);
 }
 
 @media (prefers-reduced-motion: reduce) {

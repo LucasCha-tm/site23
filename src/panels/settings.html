@@ -1,12 +1,33 @@
 <div class="container">
-    <div class="nav-settings">
-        <p>Paramètres</p>
+    <!-- Barre latérale -->
+    <div class="rail">
+        <img class="rail-logo" src="assets/images/icon/icon.png" alt="Site-23">
+        <div class="rail-sep"></div>
+
+        <div class="rail-item rail-link rail-home" title="Accueil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h5v-6h4v6h5V10"></path></svg>
+        </div>
+
+        <div class="rail-item rail-link rail-status" title="État des serveurs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+        </div>
+
+        <div class="rail-spacer"></div>
+
+        <div class="rail-item active" title="Réglages">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+        </div>
+    </div>
+
+    <div class="settings-main">
+    <div class="settings-header">
+        <div class="settings-title">Paramètres</div>
         <div class="nav-box">
             <div id="account" class="nav-settings-btn active-settings-BTN">COMPTES</div>
             <div id="java" class="nav-settings-btn">JAVA</div>
             <div id="resolution" class="nav-settings-btn">RESOLUTION</div>
             <div id="launcher" class="nav-settings-btn">LAUNCHER</div>
-            <div id="save" class="nav-settings-btn">ACCUEIL</div>
+            <div id="save" class="nav-settings-btn">RETOUR</div>
         </div>
     </div>
 
@@ -127,6 +148,36 @@
             </div>
         </div>
 
+        <div class="titre-tab">Animations, sons et musique</div>
+        <div class="settings-elements-box">
+            <div class="setting-text">
+                Les événements (Noël, Halloween, Pâques...) ajoutent des animations, des bruitages et une musique d'ambiance.<br>
+                <b>Automatique</b> suit le réglage Windows « Afficher les animations » : si vous l'avez désactivé, les animations le sont aussi.<br><br>
+                Les sons et la musique sont générés directement par le launcher (aucun fichier audio, aucun droit d'auteur).
+            </div>
+            <div class="settings-elements content-evenly">
+                <div class="fx-btn fx-anim-btn" data-value="auto">Animations : automatique</div>
+                <div class="fx-btn fx-anim-btn" data-value="on">Animations : activées</div>
+                <div class="fx-btn fx-anim-btn" data-value="off">Animations : désactivées</div>
+            </div>
+            <div class="settings-elements content-evenly">
+                <div class="fx-btn fx-sound-btn" data-value="on">Effets sonores : activés</div>
+                <div class="fx-btn fx-sound-btn" data-value="off">Effets sonores : désactivés</div>
+                <div class="fx-volume-box">
+                    <span>Volume</span>
+                    <input type="range" min="0" max="100" step="5" class="fx-volume">
+                </div>
+            </div>
+            <div class="settings-elements content-evenly">
+                <div class="fx-btn fx-music-btn" data-value="on">Musique : activée</div>
+                <div class="fx-btn fx-music-btn" data-value="off">Musique : désactivée</div>
+                <div class="fx-volume-box">
+                    <span>Volume</span>
+                    <input type="range" min="0" max="100" step="5" class="fx-music-volume">
+                </div>
+            </div>
+        </div>
+
         <div class="titre-tab">Comportement du launcher au démarrage</div>
         <div class="settings-elements-box">
             <div class="setting-text">
@@ -151,5 +202,6 @@
                 <div class="close-none close-btn">Environnement SILICON</div>
             </div>
         </div> -->
+    </div>
     </div>
 </div>

@@ -4,7 +4,11 @@
  */
 
 import { changePanel, accountSelect, database, Slider, config, setStatus, popup, appdata, setBackground } from '../utils.js'
-const { ipcRenderer } = require('electron');
+import { getPref, setPref, soundsEnabled, volume, musicEnabled, musicVolume } from '../prefs.js'
+import { play } from '../sfx.js'
+const { ipcRenderer, shell } = require('electron');
+
+const STATUS_PAGE_URL = 'https://site23.betteruptime.com/'
 const os = require('os');
 
 class Settings {
@@ -13,11 +17,60 @@ class Settings {
         this.config = config;
         this.db = new database();
         this.navBTN()
+        this.railButtons()
+        this.fxSettings()
         this.accounts()
         this.ram()
         this.javaPath()
         this.resolution()
         this.launcher()
+    }
+
+    fxSettings() {
+        const sync = () => {
+            const anim = getPref('animations', 'auto')
+            document.querySelectorAll('.settings .fx-anim-btn').forEach(b => b.classList.toggle('active-fx', b.dataset.value === anim))
+
+            const snd = soundsEnabled()
+            document.querySelectorAll('.settings .fx-sound-btn').forEach(b => b.classList.toggle('active-fx', (b.dataset.value === 'on') === snd))
+            const vol = document.querySelector('.settings .fx-volume')
+            if (vol) vol.value = Math.round(volume() * 100)
+
+            const mus = musicEnabled()
+            document.querySelectorAll('.settings .fx-music-btn').forEach(b => b.classList.toggle('active-fx', (b.dataset.value === 'on') === mus))
+            const mvol = document.querySelector('.settings .fx-music-volume')
+            if (mvol) mvol.value = Math.round(musicVolume() * 100)
+        }
+
+        document.querySelectorAll('.settings .fx-anim-btn').forEach(b => b.addEventListener('click', () => {
+            setPref('animations', b.dataset.value)
+            sync()
+        }))
+        document.querySelectorAll('.settings .fx-sound-btn').forEach(b => b.addEventListener('click', () => {
+            setPref('sounds', b.dataset.value === 'on')
+            sync()
+        }))
+        document.querySelectorAll('.settings .fx-music-btn').forEach(b => b.addEventListener('click', () => {
+            setPref('music', b.dataset.value === 'on')
+            sync()
+        }))
+
+        const vol = document.querySelector('.settings .fx-volume')
+        if (vol) {
+            vol.addEventListener('input', e => setPref('volume', Number(e.target.value) / 100))
+            vol.addEventListener('change', () => play('click'))
+        }
+        const mvol = document.querySelector('.settings .fx-music-volume')
+        if (mvol) mvol.addEventListener('input', e => setPref('musicVolume', Number(e.target.value) / 100))
+
+        sync()
+    }
+
+    railButtons() {
+        // Accueil : même effet que le bouton « RETOUR »
+        document.querySelector('.settings .rail-home')?.addEventListener('click', () => document.querySelector('#save').click())
+        // Page de statut des serveurs (navigateur)
+        document.querySelector('.settings .rail-status')?.addEventListener('click', () => shell.openExternal(STATUS_PAGE_URL))
     }
 
     navBTN() {

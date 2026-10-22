@@ -3,6 +3,7 @@
 @import 'panels/login.css';
 @import 'panels/home.css';
 @import 'panels/settings.css';
+@import 'events.css';
 
 body {
     margin: 0;

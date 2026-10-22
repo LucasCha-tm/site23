@@ -1,0 +1,168 @@
+/*******************************************************************************
+ *  Événements saisonniers (Noël, Halloween, Pâques...)
+ *  Activés depuis le site : Admin > Tablette carcérale > Événements.
+ ******************************************************************************/
+
+/* Décor : sous l'interface, au-dessus du fond d'écran */
+#event-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+}
+
+#event-bg svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#event-bg svg.garland {
+    top: 24px;
+    height: 44px;
+}
+
+/* Ambiance : vignette sombre et fines lignes d'écran de contrôle */
+#event-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.45) 100%),
+        repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 3px);
+}
+
+/* Particules : au-dessus de tout, sans bloquer les clics */
+#fx-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+}
+
+/* Bandeau en haut, au centre (zone de la barre de titre) */
+.event-banner {
+    display: none;
+    position: fixed;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.15rem 1.2rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background: var(--element-color);
+    color: var(--on-accent);
+    pointer-events: none;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--on-accent);
+    animation: event-blink 1.4s infinite;
+}
+
+@keyframes event-blink {
+    50% { opacity: 0.2; }
+}
+
+@keyframes bulb-twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+
+@keyframes fog-drift {
+    from { transform: translateX(-60px); }
+    to { transform: translateX(60px); }
+}
+
+.bulb {
+    animation: bulb-twinkle 1.8s ease-in-out infinite;
+}
+
+.fog {
+    animation: fog-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes alarm-pulse {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 1; }
+}
+
+@keyframes light-flicker {
+    0%, 100% { opacity: 1; }
+    45% { opacity: 0.35; }
+    50% { opacity: 1; }
+    70% { opacity: 0.6; }
+}
+
+@keyframes beacon {
+    0%, 60% { opacity: 1; }
+    61%, 100% { opacity: 0.1; }
+}
+
+@keyframes ecg-sweep {
+    from { transform: translateX(0); }
+    to { transform: translateX(1600px); }
+}
+
+.alarm { animation: alarm-pulse 1.6s ease-in-out infinite; }
+.alarm.b { animation-delay: 0.8s; }
+.flicker { animation: light-flicker 3.2s infinite; }
+.blink { animation: beacon 2s infinite; }
+.sweep { animation: ecg-sweep 7s linear infinite; }
+
+/* Animations coupées (réglage du launcher ou réduction des animations de Windows) */
+body[data-fx="off"] #event-bg *,
+body[data-fx="off"] .event-dot {
+    animation: none !important;
+}
+
+/*******************************************************************************
+ *  Couleurs d'accent par événement (valables en thème clair et sombre)
+ ******************************************************************************/
+
+body[data-event="christmas"] {
+    --element-color: #d93a3a;
+    --element-dark: #b02a2a;
+    --on-accent: #ffffff;
+    --ok: #5ec27a;
+}
+
+body[data-event="halloween"] {
+    --element-color: #a35be0;
+    --element-dark: #7e3fb8;
+    --on-accent: #ffffff;
+}
+
+body[data-event="easter"] {
+    --element-color: #e57fbd;
+    --element-dark: #c4619f;
+    --on-accent: #1a1018;
+}
+
+body[data-event="newyear"] {
+    --element-color: #e8b923;
+    --element-dark: #c39a12;
+    --on-accent: #0b0b0b;
+}
+
+body[data-event="valentine"] {
+    --element-color: #e6446f;
+    --element-dark: #bf2f57;
+    --on-accent: #ffffff;
+}

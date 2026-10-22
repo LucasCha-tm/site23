@@ -1,44 +1,105 @@
 <div class="container">
-    <div class="status-server">
-        <img class="server-status-icon" src="assets/images/icon/icon.png">
-        <div class="server-status-infos">
-            <div class="server-status-name">Minecraft</div>
-            <div class="server-status-text">operationeel - 0 ms</div>
+
+    <!-- Barre latérale -->
+    <div class="rail">
+        <img class="rail-logo" src="assets/images/icon/icon.png" alt="Site-23">
+        <div class="rail-sep"></div>
+
+        <div class="rail-item active" title="Accueil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 11l9-8 9 8"></path>
+                <path d="M5 10v10h5v-6h4v6h5V10"></path>
+            </svg>
         </div>
-        <div class="status-player-count">
-            <div class="player-count">0</div>
+
+        <div class="rail-item rail-link rail-status" title="État des serveurs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
         </div>
+
+        <div class="rail-spacer"></div>
+
+        <div class="settings-btn icon-settings" title="Réglages"></div>
+        <div class="player-head"></div>
     </div>
 
-    <div class="home-bottom">
+    <!-- Contenu principal -->
+    <div class="main">
+
+        <!-- En-tête : serveur + bouton Jouer -->
+        <div class="hero">
+            <div class="hero-left">
+                <div class="hero-welcome">Bienvenue, <span class="hero-name">...</span></div>
+
+                <div class="hero-status">
+                    <div class="status-player-count">
+                        <div class="player-count">0</div>
+                        <span class="players-label">joueurs</span>
+                    </div>
+                    <div class="server-status-text">Connexion...</div>
+                </div>
+
+                <div class="server-status-name">Site-23</div>
+            </div>
+
+            <div class="hero-right">
+                <div class="play-elements">
+                    <div class="play-instance">
+                        <button class="play-btn">Jouer</button>
+                        <div class="instance-select icon-arrow"></div>
+                    </div>
+                    <div class="info-starting-game">
+                        <div class="info-starting-game-text">Connexion...</div>
+                        <progress value="0" max="0" class="progress-bar"></progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartes : tablette carcérale, sanctions, session -->
+        <div class="widgets">
+            <div class="karma-info" style="display: none;">
+                <div class="karma-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3l8 3v5c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-3z"></path>
+                        <path d="M12 8v5"></path>
+                        <path d="M12 16.5v.01"></path>
+                    </svg>
+                </div>
+                <div class="karma-body">
+                    <div class="karma-label">Tablette carcérale</div>
+                    <div class="karma-row">
+                        <span class="karma-points">0 pts</span>
+                        <span class="karma-badge">--</span>
+                    </div>
+                    <div class="karma-gauge"><div class="karma-cursor"></div></div>
+                </div>
+            </div>
+
+            <div class="sanction-info" style="display: none;">
+                <div class="sanction-label">Sanctions</div>
+                <div class="sanction-list"></div>
+            </div>
+
+            <div class="session-info">
+                <div class="session-label">Session</div>
+                <div class="session-row">
+                    <span class="session-name">À définir</span>
+                    <span class="session-badge" style="display: none;"></span>
+                </div>
+                <div class="session-countdown"></div>
+            </div>
+        </div>
+
+        <!-- Actualités + réseaux sociaux -->
         <div class="new-tab">
-            <div class="titre-tab-new">Actualités</div>
+            <div class="news-head">
+                <div class="titre-tab-new">Actualités</div>
+                <div class="social-tab">
+                    <div class="social-list content-scroll"></div>
+                </div>
+            </div>
             <div class="news-list content-scroll"></div>
         </div>
-        <div class="social-tab">
-            <div class="social-list content-scroll">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="sidebar">
-        <div class="player-options">
-            <div class="player-head"></div>
-        </div>
-
-        <div class="play-elements">
-            <div class="play-instance">
-                <button class="play-btn">Jouer</button>
-                <div class="instance-select icon-arrow"></div>
-            </div>
-            <div class="info-starting-game">
-                <div class="info-starting-game-text">Connexion...</div>
-                <progress value="0" max="0" class="progress-bar"></progress>
-            </div>
-        </div>
-
-        <div class="settings-btn icon-settings"></div>
     </div>
 
     <div class="instance-popup">
