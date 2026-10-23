@@ -5,7 +5,7 @@
  */
 
 import { soundsEnabled, getPref } from './prefs.js'
-import { getAudio, noiseBuf, sfxOut, refreshVolumes } from './audio.js'
+import { getAudio, noiseBuf, sfxOut, refreshVolumes, isGameRunning } from './audio.js'
 
 let eventKey = ''
 let ready = false
@@ -164,7 +164,7 @@ const R = {
 }
 
 export function play(kind = 'click') {
-    if (!soundsEnabled()) return
+    if (!soundsEnabled() || isGameRunning()) return
     const A = getAudio()
     if (!A) return
     refreshVolumes()

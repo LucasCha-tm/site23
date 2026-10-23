@@ -14,6 +14,7 @@
 import { animationsEnabled } from './prefs.js'
 import { setEventSound } from './sfx.js'
 import { setMusicEvent } from './music.js'
+import { isGameRunning } from './audio.js'
 import { ART, garland } from './event-art.js'
 
 const nodeFetch = require('node-fetch')
@@ -252,7 +253,7 @@ function applyAnimation() {
     if (!current) return
     const on = animationsEnabled()
     document.body.dataset.fx = on ? 'on' : 'off'
-    if (on && !document.hidden) startParticles(THEMES[current].particles)
+    if (on && !document.hidden && !isGameRunning()) startParticles(THEMES[current].particles)
     else stopParticles()
 }
 

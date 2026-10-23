@@ -5,6 +5,7 @@
 import { config, database, logger, changePanel, appdata, setStatus, pkg, popup } from '../utils.js'
 import { startEvents } from '../fx.js'
 import { initSfx } from '../sfx.js'
+import { setGameRunning } from '../audio.js'
 
 const { Launch } = require('minecraft-java-core')
 const { shell, ipcRenderer } = require('electron')
@@ -563,6 +564,7 @@ class Home {
         });
 
         launch.on('data', (e) => {
+            setGameRunning(true)
             progressBar.style.display = "none"
             if (configClient.launcher_config.closeLauncher == 'close-launcher') {
                 ipcRenderer.send("main-window-hide")
@@ -574,6 +576,7 @@ class Home {
         })
 
         launch.on('close', code => {
+            setGameRunning(false)
             if (configClient.launcher_config.closeLauncher == 'close-launcher') {
                 ipcRenderer.send("main-window-show")
             };
@@ -586,6 +589,7 @@ class Home {
         });
 
         launch.on('error', err => {
+            setGameRunning(false)
             let popupError = new popup()
 
             popupError.openPopup({

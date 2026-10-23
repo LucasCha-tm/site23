@@ -6,6 +6,7 @@
 import { soundsEnabled, volume, musicEnabled, musicVolume } from './prefs.js'
 
 let A = null
+let gameRunning = false
 let gestureBound = false
 let noise = null
 
@@ -78,8 +79,37 @@ export function getAudio() {
 export function refreshVolumes() {
     if (!A) return
     const t = A.ctx.currentTime
-    A.sfxBus.gain.setTargetAtTime(soundsEnabled() ? volume() * 1.6 : 0, t, 0.05)
-    A.musicBus.gain.setTargetAtTime(musicEnabled() ? musicVolume() * 1.3 : 0, t, 0.1)
+    A.sfxBus.gain.setTargetAtTime(soundsEnabled() && !gameRunning ? volume() * 1.6 : 0, t, 0.05)
+    A.musicBus.gain.setTargetAtTime(musicEnabled() && !gameRunning ? musicVolume() * 1.3 : 0, t, 0.1)
+}
+
+export function isGameRunning() {
+    return gameRunning
+}
+
+/**
+ * Pendant que Minecraft tourne, le launcher se tait : la musique et les sons
+ * sont coupés (fondu), l'audio est suspendu, et les animations s'arrêtent.
+ * Tout reprend à la fermeture du jeu.
+ */
+export function setGameRunning(value) {
+    value = Boolean(value)
+    if (value === gameRunning) return
+    gameRunning = value
+
+    if (A) {
+        refreshVolumes()
+        if (value) {
+            setTimeout(() => {
+                if (gameRunning && A) A.ctx.suspend().catch(() => {})
+            }, 700)
+        } else {
+            A.ctx.resume().catch(() => {})
+        }
+    }
+
+    // Prévient la musique et les animations (elles écoutent cet événement)
+    window.dispatchEvent(new CustomEvent('site23-prefs', { detail: { name: 'game', value } }))
 }
 
 export function noiseBuf(ctx) {

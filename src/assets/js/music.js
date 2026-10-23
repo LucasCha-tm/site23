@@ -8,7 +8,7 @@
  */
 
 import { musicEnabled } from './prefs.js'
-import { getAudio, refreshVolumes, noiseBuf } from './audio.js'
+import { getAudio, refreshVolumes, noiseBuf, isGameRunning } from './audio.js'
 
 const mtof = m => 440 * Math.pow(2, (m - 69) / 12)
 const CH = { maj: [0, 4, 7], min: [0, 3, 7], dom: [0, 4, 7, 10] }
@@ -383,7 +383,7 @@ function stopTrack() {
 }
 
 function sync() {
-    const should = currentKey && TRACKS[currentKey] && musicEnabled()
+    const should = currentKey && TRACKS[currentKey] && musicEnabled() && !isGameRunning()
     if (!should) return stopTrack()
     if (track && track.key === currentKey) return
     stopTrack()
