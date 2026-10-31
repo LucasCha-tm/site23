@@ -12,51 +12,78 @@
             </svg>
         </div>
 
+        <div class="rail-spacer"></div>
+
         <div class="rail-item rail-link rail-status" title="État des serveurs">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
         </div>
-
-        <div class="rail-spacer"></div>
-
         <div class="settings-btn icon-settings" title="Réglages"></div>
         <div class="player-head"></div>
     </div>
 
-    <!-- Contenu principal -->
-    <div class="main">
+    <div class="stage">
 
-        <!-- En-tête : serveur + bouton Jouer -->
+        <!-- Héros : titre, bouton Jouer, actualités -->
         <div class="hero">
-            <div class="hero-left">
-                <div class="hero-welcome">Bienvenue, <span class="hero-name">...</span></div>
-
-                <div class="hero-status">
-                    <div class="status-player-count">
-                        <div class="player-count">0</div>
-                        <span class="players-label">joueurs</span>
-                    </div>
-                    <div class="server-status-text">Connexion...</div>
+            <div class="hero-top">
+                <div class="status-player-count">
+                    <div class="player-count">0</div>
+                    <span class="players-label">joueurs en ligne</span>
                 </div>
-
-                <div class="server-status-name">Site-23</div>
             </div>
 
-            <div class="hero-right">
-                <div class="play-elements">
-                    <div class="play-instance">
-                        <button class="play-btn">Jouer</button>
-                        <div class="instance-select icon-arrow"></div>
+            <div class="hero-main">
+                <div class="hero-left">
+                    <div class="server-status-name">Site-23</div>
+                    <div class="hero-desc">Serveur SCP : confinez, protégez, survivez. Rejoignez le personnel de la Fondation.</div>
+
+                    <div class="hero-actions">
+                        <div class="play-elements">
+                            <div class="play-instance">
+                                <button class="play-btn">Jouer</button>
+                                <div class="instance-select icon-arrow"></div>
+                            </div>
+                            <div class="info-starting-game">
+                                <div class="info-starting-game-text">Connexion...</div>
+                                <progress value="0" max="0" class="progress-bar"></progress>
+                            </div>
+                        </div>
+
+                        <div class="hero-chip">
+                            <div class="player-head"></div>
+                            <span class="hero-name">...</span>
+                        </div>
                     </div>
-                    <div class="info-starting-game">
-                        <div class="info-starting-game-text">Connexion...</div>
-                        <progress value="0" max="0" class="progress-bar"></progress>
+
+                    <div class="hero-version">
+                        <div class="server-status-text">Connexion...</div>
                     </div>
+                </div>
+
+                <div class="new-tab">
+                    <div class="news-head">
+                        <div class="titre-tab-new">Actualités</div>
+                        <div class="social-tab">
+                            <div class="social-list content-scroll"></div>
+                        </div>
+                    </div>
+                    <div class="news-list content-scroll"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Cartes : tablette carcérale, sanctions, session -->
-        <div class="widgets">
+        <!-- Dossier du joueur -->
+        <div class="dossier content-scroll">
+            <div class="dossier-title">Dossier du joueur</div>
+
+            <div class="player-card">
+                <div class="player-head"></div>
+                <div>
+                    <div class="hero-name">...</div>
+                    <div class="player-card-online">En ligne</div>
+                </div>
+            </div>
+
             <div class="karma-info" style="display: none;">
                 <div class="karma-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -88,17 +115,6 @@
                 </div>
                 <div class="session-countdown"></div>
             </div>
-        </div>
-
-        <!-- Actualités + réseaux sociaux -->
-        <div class="new-tab">
-            <div class="news-head">
-                <div class="titre-tab-new">Actualités</div>
-                <div class="social-tab">
-                    <div class="social-list content-scroll"></div>
-                </div>
-            </div>
-            <div class="news-list content-scroll"></div>
         </div>
     </div>
 

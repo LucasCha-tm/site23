@@ -112,8 +112,8 @@ export const ART = {
             <circle class="alarm b" cx="1600" cy="0" r="460" fill="url(#hw-alarm)"/>
             <g class="fog"><ellipse cx="500" cy="820" rx="460" ry="42" fill="#cdbfe6" fill-opacity=".05"/><ellipse cx="1150" cy="850" rx="520" ry="48" fill="#cdbfe6" fill-opacity=".04"/></g>
             ${hazard('hw-hz', 872, 28, 0.55)}
-            ${tag(40, 60, 470, 'ALERTE // BRÈCHE DE CONFINEMENT', '#ff5a4a', 0.7)}
-            ${text(1560, 60, 'SECTEUR 7 // ACCÈS RESTREINT', { anchor: 'end', color: '#ffb0a0', op: 0.45 })}`)
+            ${tag(40, 872, 470, 'ALERTE // BRÈCHE DE CONFINEMENT', '#ff5a4a', 0.7)}
+            ${text(1560, 862, 'SECTEUR 7 // ACCÈS RESTREINT', { anchor: 'end', color: '#ffb0a0', op: 0.45 })}`)
     },
 
     // Spécimens ovoïdes en vitrine de confinement
@@ -191,9 +191,9 @@ export const ART = {
             <path d="${ecg}" fill="none" stroke="#e0506f" stroke-opacity=".18" stroke-width="14" stroke-linejoin="round"/>
             <path d="${ecg}" fill="none" stroke="#ff7a99" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"/>
             <g class="sweep"><rect x="0" y="470" width="3" height="330" fill="#ff8fab" fill-opacity=".5"/></g>
-            ${text(40, 60, 'FRÉQUENCE CARDIAQUE : 72 BPM', { color: '#ffb3c6', op: 0.55, size: 17 })}
-            ${text(40, 88, 'RYTHME : SINUSAL', { color: '#ffb3c6', op: 0.4, size: 14 })}
-            ${text(1560, 60, 'NIVEAU D’ATTACHEMENT : ÉLEVÉ', { anchor: 'end', color: '#ffb3c6', op: 0.45 })}
+            ${text(40, 780, 'FRÉQUENCE CARDIAQUE : 72 BPM', { color: '#ffb3c6', op: 0.55, size: 17 })}
+            ${text(40, 806, 'RYTHME : SINUSAL', { color: '#ffb3c6', op: 0.4, size: 14 })}
+            ${text(1560, 806, 'NIVEAU D’ATTACHEMENT : ÉLEVÉ', { anchor: 'end', color: '#ffb3c6', op: 0.45 })}
             <path d="M0 880 Q 500 855 1000 876 T 1600 868 V900 H0Z" fill="#14030a" fill-opacity=".85"/>
             ${tag(40, 872, 590, 'ANOMALIE AFFECTIVE // SUJET STABLE', '#ff7a99', 0.55)}`)
     }

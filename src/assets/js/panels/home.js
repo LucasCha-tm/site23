@@ -13,6 +13,9 @@ const nodeFetch = require('node-fetch')
 
 const STATUS_PAGE_URL = 'https://site23.betteruptime.com/'
 
+// Pseudo du compte connecté (selon le type de compte)
+const accountName = a => (a && (a.name || (a.profile && a.profile.name) || a.username)) || null
+
 class Home {
     static id = "home";
     async init(config) {
@@ -27,21 +30,59 @@ class Home {
         this.karma()
         this.sanctions()
         this.session()
+        this.syncHeads()
+        this.watchActivation()
         document.querySelector('.settings-btn').addEventListener('click', e => changePanel('settings'))
         document.querySelector('.home .rail-status')?.addEventListener('click', () => shell.openExternal(STATUS_PAGE_URL))
     }
 
+    /** Copie la tête de skin (posée par le launcher sur la première) vers toutes les autres. */
+    syncHeads() {
+        const heads = Array.from(document.querySelectorAll('.home .player-head'))
+        const first = heads[0]
+        if (!first) return
+        const copy = () => {
+            const bg = first.style.backgroundImage
+            if (bg) heads.slice(1).forEach(h => { h.style.backgroundImage = bg })
+        }
+        new MutationObserver(copy).observe(first, { attributes: true, attributeFilter: ['style'] })
+        copy()
+    }
+
+    /** Recharge pseudo, tablette, sanctions et session quand l'accueil s'affiche (ex. juste après la connexion). */
+    watchActivation() {
+        const panel = document.querySelector('.panel.home')
+        if (!panel) return
+        let wasActive = panel.classList.contains('active')
+        new MutationObserver(() => {
+            const nowActive = panel.classList.contains('active')
+            if (nowActive && !wasActive) {
+                this.welcome()
+                this.karma()
+                this.sanctions()
+                this.session()
+            }
+            wasActive = nowActive
+        }).observe(panel, { attributes: true, attributeFilter: ['class'] })
+    }
+
     /** Affiche le pseudo du joueur connecté dans l'en-tête. */
     async welcome() {
-        try {
-            const el = document.querySelector('.hero-name')
-            if (!el) return
-            let configClient = await this.db.readData('configClient')
-            let auth = await this.db.readData('accounts', configClient.account_selected)
-            if (auth?.name) el.textContent = auth.name
-        } catch (err) {
-            console.log(`[Accueil] ${err && err.message ? err.message : err}`)
+        const apply = async () => {
+            try {
+                const els = document.querySelectorAll('.home .hero-name')
+                if (!els.length) return
+                let configClient = await this.db.readData('configClient')
+                let auth = await this.db.readData('accounts', configClient.account_selected)
+                const name = accountName(auth)
+                if (name) els.forEach(el => { if (el.textContent !== name) el.textContent = name })
+            } catch (err) {
+                console.log(`[Accueil] ${err && err.message ? err.message : err}`)
+            }
         }
+        clearInterval(this.welcomeTimer)
+        await apply()
+        this.welcomeTimer = setInterval(apply, 3000)
     }
 
     /**
@@ -64,23 +105,34 @@ class Home {
         // Adresse du site Azuriom où le plugin « Tablette carcérale » est installé
         const KARMA_SITE_URL = 'https://site23.alwaysdata.net'
 
+        const unavailable = () => {
+            box.querySelector('.karma-points').textContent = 'Indisponible'
+            const badge = box.querySelector('.karma-badge')
+            badge.textContent = '—'
+            badge.style.background = ''
+            box.style.display = 'flex'
+        }
+
         const refresh = async () => {
             try {
                 let configClient = await this.db.readData('configClient')
                 let auth = await this.db.readData('accounts', configClient.account_selected)
-                if (!auth?.name) {
-                    console.log('[Tablette] aucun compte connecté')
+                const name = accountName(auth)
+                if (!name) {
+                    console.log(`[Tablette] aucun pseudo trouvé (compte : ${auth ? Object.keys(auth).join(', ') : 'aucun'}), nouvel essai dans 3 s`)
+                    clearTimeout(this.karmaRetry)
+                    this.karmaRetry = setTimeout(refresh, 3000)
                     return (box.style.display = 'none')
                 }
 
                 const base = KARMA_SITE_URL.replace(/\/+$/, '')
-                const apiUrl = `${base}/api/karma/${encodeURIComponent(auth.name)}`
+                const apiUrl = `${base}/api/karma/${encodeURIComponent(name)}`
                 console.log(`[Tablette] appel de ${apiUrl}`)
 
                 const res = await nodeFetch(apiUrl, { timeout: 8000 })
                 if (res.status !== 200) {
-                    console.log(`[Tablette] réponse HTTP ${res.status} (config.online = ${this.config.online})`)
-                    return (box.style.display = 'none')
+                    console.log(`[Tablette] réponse HTTP ${res.status}`)
+                    return unavailable()
                 }
                 const data = await res.json()
                 console.log(`[Tablette] données reçues ${JSON.stringify(data)}`)
@@ -108,7 +160,7 @@ class Home {
                 box.style.display = 'flex'
             } catch (err) {
                 console.log(`[Tablette] erreur : ${err && err.message ? err.message : err}`)
-                box.style.display = 'none'
+                unavailable()
             }
         }
 
@@ -159,7 +211,11 @@ class Home {
         }
 
         const render = () => {
-            if (!state || !state.available) return (box.style.display = 'none')
+            if (!state || !state.available) {
+                list.innerHTML = ''
+                addRow('#6f6f6b', 'Indisponible', '', 'Impossible de lire les sanctions pour le moment')
+                return (box.style.display = 'block')
+            }
             const now = Date.now() + offset
             list.innerHTML = ''
             let any = false
@@ -184,9 +240,14 @@ class Home {
             try {
                 let configClient = await this.db.readData('configClient')
                 let auth = await this.db.readData('accounts', configClient.account_selected)
-                if (!auth?.name) return (box.style.display = 'none')
+                const name = accountName(auth)
+                if (!name) {
+                    clearTimeout(this.sanctionRetry)
+                    this.sanctionRetry = setTimeout(refresh, 3000)
+                    return (box.style.display = 'none')
+                }
 
-                const apiUrl = `${KARMA_SITE_URL}/api/karma/${encodeURIComponent(auth.name)}/sanctions`
+                const apiUrl = `${KARMA_SITE_URL}/api/karma/${encodeURIComponent(name)}/sanctions`
                 console.log(`[Sanctions] appel de ${apiUrl}`)
                 const res = await nodeFetch(apiUrl, { timeout: 8000 })
                 if (res.status !== 200) {
